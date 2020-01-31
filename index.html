@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Ordbok</title>
+  <link rel="stylesheet" href="index.css">
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-firestore.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyDdbTmNSxeIQACBpggwEWb9-79QDbJwBtw",
+      authDomain: "ordbok-c6113.firebaseapp.com",
+      databaseURL: "https://ordbok-c6113.firebaseio.com",
+      projectId: "ordbok-c6113",
+      storageBucket: "ordbok-c6113.appspot.com",
+      messagingSenderId: "814421028691",
+      appId: "1:814421028691:web:e53c2b525992ddbf4afba6"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <a  class="active" href="index.html">Ordbok</a>
+      <a href="registrerOrd.html">Legg til ord</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="margin-top">
+
+
+    <section id="knapp">
+      <button href="index.html" onclick="sorterAlfabetisk()">A til å</button>
+<button href="index.html" onclick="sorterRating()">Sorter etter Skaper</button>
+    </section>
+    <section id="grid" class="overtekst">
+
+    <div>
+       <p>Norsk</p>
+        </div>
+        <div>
+       <p>Retardabitur motus</p>
+              </div>
+        <div>
+       <p>Rating</p>
+              </div>
+        <div>
+       <p>Skaper</p>
+              </div>
+                  </section>
+    <section id="secOrd">
+
+    </section>
+    </div>
+  </main>
+
+  <footer></footer>
+
+
+
+  <script type="text/javascript">
+    // referanser til HTML-elementer
+
+    const wordelement = document.querySelector("#secOrd") // her spør man etter selektoren #secword. Når man skriver wordelement mener man #secword.
+
+    //referanser til databasen
+    const db = firebase.firestore();
+
+    const wordColl = db.collection("ordbok");
+
+    //spørringer
+
+    wordColl.get().then(snapshot => skrivResultat(snapshot)); //vi tar bilde av databasen og sender det inn i funksjonen skrivResultat
+
+    function sorterAlfabetisk() {
+
+      wordColl.orderBy("Norsk").get().then(snapshot => skrivResultat(snapshot));
+      wordelement.innerHTML = `
+  `;
+    }
+
+    function sorterRating() {
+      wordColl.orderBy("Creator").get().then(snapshot => skrivResultat(snapshot));
+      wordelement.innerHTML = `
+  `;
+    }
+
+    // Javascript funksjoner
+    function skrivResultat(snapshot) {
+      snapshot.forEach(snap => lagwordHTML(snap.data()))
+    }
+
+
+    function lagwordHTML(ordbok) {
+
+      wordelement.innerHTML += `
+  <section id="grid">
+
+  <div class="word">
+      <p>${ordbok["Norsk"]}</p>
+        </div>
+          <div class="word">
+      <p>${ordbok["Verba"]}</p>
+            </div>
+        <div class="word">
+      <p>${ordbok["Rating"]}</p>
+            </div>
+        <div class="word">
+      <p>${ordbok["Creator"]}</p>
+            </div>
+
+
+  </section>
+
+
+  ` // options og den ved siden av backspace
+
+    }
+  </script>
+
+
+</body>
+
+</html>

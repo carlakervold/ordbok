@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<link rel="stylesheet" href="index.css">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-firestore.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDdbTmNSxeIQACBpggwEWb9-79QDbJwBtw",
+    authDomain: "ordbok-c6113.firebaseapp.com",
+    databaseURL: "https://ordbok-c6113.firebaseio.com",
+    projectId: "ordbok-c6113",
+    storageBucket: "ordbok-c6113.appspot.com",
+    messagingSenderId: "814421028691",
+    appId: "1:814421028691:web:e53c2b525992ddbf4afba6"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+  </head>
+  <body>
+
+<header>
+<nav>
+  <a href="index.html">Ordbok</a>
+  <a class="active" href="registrerOrd.html">Legg til ord</a>
+</nav>
+</header>
+
+<main>
+<div class="margin-top">
+<h1 id="overskrift">Legg til et Retardabitur motus verba!</h1>
+  <form onsubmit="sendData(event)" id="form" action="index.html" method="post">
+  <input id="inpNorskId" type="text" name="" value="" placeholder="Ord på Norsk">
+  <input id="inpVerba" type="text" placeholder="Nytt ord">
+  <input id="inpRating" type="text" placeholder="Rating til 10">
+  <input id="inpCreator" type="text" placeholder="Grunnlegger">
+  <button type="submit" name="button">Send Inn</button>
+  </form>
+  <style media="screen">
+  input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+  }
+  input[type=text]:focus {
+  background-color: lightblue;
+}
+  </style>
+
+
+</div>
+</main>
+
+<footer></footer>
+
+<script type="text/javascript">
+//referanser til html elementer
+const inpNorskId = document.querySelector("#inpNorskId")
+const inpVerba = document.querySelector("#inpVerba");
+const inpRating = document.querySelector("#inpRating");
+const inpCreator = document.querySelector("#inpCreator");
+const form = document.querySelector("#form");
+
+
+
+//referanser til databasen
+const db = firebase.firestore();
+
+const wordColl = db.collection("ordbok");
+
+//sende data til databasen
+
+
+function sendData(event) {
+  event.preventDefault();
+  const nyOrd = {
+    Norsk: inpNorskId.value,
+    Verba: inpVerba.value,
+    Creator: inpCreator.value,
+    Rating: inpRating.value,
+
+  }
+  wordColl.add(nyOrd).then(form.reset())
+  // filmColl.doc(inpFilmId.value).set(nyFilm).then();
+}
+
+//filmColl.doc("f006").set(nyFilm).then(console.log("Sendt!"));
+
+//filmColl.add(nyFilm).then(console.log("Sendt uten primærnøkkel")); //dette lager en ny greie på databasen
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,105 @@
+body{
+  background-color: lightgray;
+}
+
+#overskrift{
+  text-align: center;
+  font-size: 40px;
+}
+.margin-top{
+  margin-top: 120px;
+}
+
+
+button{
+  font-size: 14px;
+  display: block;
+  margin: auto;
+
+}
+
+#grid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-style: double;
+  border-color: black;
+  border-width: 2px;
+  grid-gap: 10px;
+  width: 50%;
+  margin-left: 25%;
+}
+
+#grid p{
+  text-align: center;
+}
+.overtekst{
+  font-weight: bold;
+}
+
+nav {
+  background-color: #264653;
+  display: grid;
+  grid-template-columns: repeat(6, auto) 1fr;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+
+  z-index: 1000;
+}
+
+nav a:hover:not(.active) {
+  background-color: #395662;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  padding: 30px;
+  font-family: monospace;
+}
+
+.active {
+  background-color: #23404C;
+}
+
+@media (max-width: 900px) {
+  nav {
+    position: relative;
+  }
+  #overskrift{
+    text-align: center;
+    font-size: 32px;
+
+  }
+  .margin-top{
+    margin-top: 50px;
+  }
+
+
+  nav a {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  nav {
+    grid-template-columns: 1fr;
+    position: relative;
+  }
+  #overskrift{
+    text-align: center;
+    font-size: 25px;
+  }
+  .margin-top{
+margin-top: 30px;
+  }
+
+  nav a {
+    padding: 10px;
+  }
+  body{
+    font-family: serif;
+  }
+}
