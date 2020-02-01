@@ -21,12 +21,13 @@ button{
 #grid{
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  border-style: double;
+  border-style: solid;
   border-color: black;
   border-width: 2px;
   grid-gap: 10px;
   width: 50%;
   margin-left: 25%;
+
 }
 
 #grid p{
@@ -102,8 +103,7 @@ margin-top: 30px;
   body{
     font-family: serif;
   }
-  #grid{
-    width: 85%;
-  
-  }
+#grid{
+
+}
 }
